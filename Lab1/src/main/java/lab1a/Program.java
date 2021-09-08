@@ -3,8 +3,9 @@ package lab1a;
 import javax.swing.*;
 
 public class Program {
-    static Thread thDec;
-    static Thread thInc;
+    private static Thread thDec;
+    private static Thread thInc;
+    private static boolean STOP;
 
     public static void main(String[] args) {
         JFrame win = new JFrame();
@@ -24,11 +25,12 @@ public class Program {
         btn.addActionListener(e -> {
             thInc = new Thread(
                     () -> {
-                        for (int i = 0; i < 200; i++) {
-                            System.out.println(Thread.currentThread().getName() + " : Slider set to value 90");
-                            slider.setValue(90);
+                        while (!STOP && slider.getValue() > 10 && slider.getValue() < 90) {
+                            slider.setValue(slider.getValue() + 1);
+                            System.out.println(Thread.currentThread().getName() +
+                                    " : Slider set to value to" + slider.getValue());
                             try {
-                                Thread.sleep(100);
+                                Thread.sleep(3);
                             } catch (InterruptedException interruptedException) {
                                 interruptedException.printStackTrace();
                             }
@@ -37,11 +39,12 @@ public class Program {
 
             thDec = new Thread(
                     () -> {
-                        for (int i = 0; i < 200; i++) {
-                            System.out.println(Thread.currentThread().getName() + " : Slider set to value 10");
-                            slider.setValue(10);
+                        while (!STOP && slider.getValue() > 10 && slider.getValue() < 90 ) {
+                            slider.setValue(slider.getValue() - 1);
+                            System.out.println(Thread.currentThread().getName() +
+                                    " : Slider set to value to" + slider.getValue());
                             try {
-                                Thread.sleep(100);
+                                Thread.sleep(3);
                             } catch (InterruptedException interruptedException) {
                                 interruptedException.printStackTrace();
                             }
@@ -51,17 +54,30 @@ public class Program {
             thInc.setPriority(1);
             thDec.setPriority(1);
 
+            STOP = false;
+            slider.setValue(50);
             thInc.start();
             thDec.start();
+
+            btn.setEnabled(false);
         });
 
         JButton bPlus = new JButton("+");
         bPlus.addActionListener(e -> thInc.setPriority(thInc.getPriority() < 10 ? thInc.getPriority() + 1 : 10));
         JButton bMinus = new JButton("-");
         bMinus.addActionListener(e -> thDec.setPriority(thDec.getPriority() < 10 ? thDec.getPriority() + 1 : 10));
+        JButton stop = new JButton("Stop");
+        stop.addActionListener(e -> {
+            slider.setValue(50);
+
+            STOP = true;
+
+            btn.setEnabled(true);
+        });
         panel.add(bMinus);
         panel.add(bPlus);
         panel.add(btn);
+        panel.add(stop);
         panel.add(slider);
         return panel;
     }
