@@ -2,11 +2,12 @@ package lab1b;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Program {
     static Thread thDec;
     static Thread thInc;
-    static int semaphore = 0;
+    private static AtomicInteger semaphore = new AtomicInteger();
 
     public static void main(String[] args) {
         JFrame win = new JFrame();
@@ -30,11 +31,11 @@ public class Program {
         status.setText("Free");
         status.setBackground(Color.GREEN);
 
-
+        semaphore.set(0);
 
         JSlider slider = new JSlider();
         btnStart1.addActionListener(e -> {
-            if(semaphore == 0) {
+            if(semaphore.get() == 0) {
                 thInc = new Thread(
                         () -> {
                             System.out.println(Thread.currentThread().getName() + " : Slider set to value 90");
@@ -43,7 +44,6 @@ public class Program {
                             while (!Thread.interrupted()){
                                 //wait
                             }
-                            semaphore--;
 
                             System.out.println(Thread.currentThread().getName() + " is shutting down");
 
@@ -52,7 +52,7 @@ public class Program {
                 thInc.setPriority(Thread.MIN_PRIORITY);
 
                 thInc.start();
-                semaphore = 1;
+                semaphore.compareAndSet(0, 1);
                 status.setText("Occupied by first thread");
                 status.setBackground(Color.RED);
 
@@ -62,7 +62,7 @@ public class Program {
         });
 
         btnStart2.addActionListener(e -> {
-            if(semaphore == 0) {
+            if(semaphore.get() == 0) {
                 thDec = new Thread(
                         () -> {
                             System.out.println(Thread.currentThread().getName() + " : Slider set to value 10");
@@ -71,7 +71,6 @@ public class Program {
                             while (!Thread.interrupted()){
                                 //wait
                             }
-                            semaphore--;
 
                             System.out.println(Thread.currentThread().getName() + " is shutting down");
                         });
@@ -79,7 +78,7 @@ public class Program {
                 thDec.setPriority(Thread.MAX_PRIORITY);
 
                 thDec.start();
-                semaphore = 1;
+                semaphore.compareAndSet(0 , 1);
                 status.setText("Occupied by second thread");
                 status.setBackground(Color.RED);
 
@@ -89,10 +88,10 @@ public class Program {
         });
 
         btnStop1.addActionListener(e -> {
-            if(semaphore == 1) {
+            if(semaphore.get() ==  1) {
                 thInc.interrupt();
                 btnStop2.setEnabled(true);
-                semaphore = 0;
+                semaphore.compareAndSet(1, 0);
 
                 status.setText("Free");
                 status.setBackground(Color.GREEN);
@@ -100,11 +99,11 @@ public class Program {
         });
 
         btnStop2.addActionListener(e -> {
-            if(semaphore == 1) {
+            if(semaphore.get() == 1) {
                 thDec.interrupt();
 
                 btnStop1.setEnabled(true);
-                semaphore = 0;
+                semaphore.compareAndSet(1, 0);
 
                 status.setText("Free");
                 status.setBackground(Color.GREEN);
