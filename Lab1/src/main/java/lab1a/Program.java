@@ -26,7 +26,9 @@ public class Program {
             thInc = new Thread(
                     () -> {
                         while (!STOP && slider.getValue() > 10 && slider.getValue() < 90) {
-                            slider.setValue(slider.getValue() + 1);
+                            synchronized (slider) {
+                                slider.setValue(slider.getValue() + 1);
+                            }
                             System.out.println(Thread.currentThread().getName() +
                                     " : Slider set to value to" + slider.getValue());
                             try {
@@ -40,7 +42,9 @@ public class Program {
             thDec = new Thread(
                     () -> {
                         while (!STOP && slider.getValue() > 10 && slider.getValue() < 90 ) {
-                            slider.setValue(slider.getValue() - 1);
+                            synchronized (slider) {
+                                slider.setValue(slider.getValue() - 1);
+                            }
                             System.out.println(Thread.currentThread().getName() +
                                     " : Slider set to value to" + slider.getValue());
                             try {
@@ -56,6 +60,10 @@ public class Program {
 
             STOP = false;
             slider.setValue(50);
+
+            thInc.setDaemon(true);
+            thDec.setDaemon(true);
+
             thInc.start();
             thDec.start();
 

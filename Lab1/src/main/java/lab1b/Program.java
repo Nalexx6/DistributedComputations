@@ -88,10 +88,10 @@ public class Program {
         });
 
         btnStop1.addActionListener(e -> {
-            if(semaphore.get() ==  1) {
+            if(semaphore.compareAndSet(1, 0)) {
                 thInc.interrupt();
                 btnStop2.setEnabled(true);
-                semaphore.compareAndSet(1, 0);
+
 
                 status.setText("Free");
                 status.setBackground(Color.GREEN);
@@ -99,11 +99,11 @@ public class Program {
         });
 
         btnStop2.addActionListener(e -> {
-            if(semaphore.get() == 1) {
+            if(semaphore.compareAndSet(1, 0)) {
                 thDec.interrupt();
 
                 btnStop1.setEnabled(true);
-                semaphore.compareAndSet(1, 0);
+
 
                 status.setText("Free");
                 status.setBackground(Color.GREEN);
