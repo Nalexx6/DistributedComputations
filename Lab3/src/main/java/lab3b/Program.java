@@ -2,7 +2,6 @@ package lab3b;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -12,13 +11,11 @@ public class Program {
     private final AtomicBoolean isBusy;
     private final Object barberMonitor;
     private final Object queueMonitor;
-    private final Object curMonitor;
-    private Queue<Customer> queue;
+    private final Queue<Customer> queue;
 
     Program(){
         barberMonitor = new Object();
         queueMonitor = new Object();
-        curMonitor = new Object();
         workFinished = new AtomicBoolean(false);
         isBusy = new AtomicBoolean(false);
         queue = new ConcurrentLinkedQueue<>();
