@@ -22,9 +22,9 @@ func boolToString(b bool) string {
 }
 
 func gardener(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
-	fmt.Println("Gardener watering plants")
 	for i := 0; i < ActionsAllowedPerThread; i++ {
 		rwMutex.Lock()
+		fmt.Println("Gardener watering plants")
 		for i := 0; i < len(garden); i++ {
 			for j := 0; j < len(garden[0]); j++ {
 				if garden[i][j] == false {
@@ -39,9 +39,9 @@ func gardener(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
 }
 
 func nature(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
-	fmt.Println("Some plants dying away")
 	for i := 0; i < ActionsAllowedPerThread; i++ {
 		rwMutex.Lock()
+		fmt.Println("Some plants dying away")
 		for i := 0; i < len(garden)*2; i++ {
 			index1 := random.Intn(len(garden))
 			index2 := random.Intn(len(garden[0]))
@@ -54,7 +54,6 @@ func nature(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
 }
 
 func monitor1(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
-	fmt.Println("Saving plants' status")
 
 	file, err := os.Create("./src/main/java/lab4b/gardenStatus.txt")
 
@@ -72,6 +71,7 @@ func monitor1(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
 
 	for i := 0; i < ActionsAllowedPerThread; i++ {
 		rwMutex.RLock()
+		fmt.Println("Saving plants' status")
 		for i := 0; i < len(garden); i++ {
 			var line string
 			for j := 0; j < len(garden[0]); j++ {
@@ -87,10 +87,10 @@ func monitor1(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
 }
 
 func monitor2(garden [][]bool, rwMutex *sync.RWMutex, exit chan int) {
-	fmt.Println("Printing plants' status")
 
 	for i := 0; i < ActionsAllowedPerThread; i++ {
 		rwMutex.RLock()
+		fmt.Println("Printing plants' status")
 		for i := 0; i < len(garden); i++ {
 			var line string
 			for j := 0; j < len(garden[0]); j++ {
