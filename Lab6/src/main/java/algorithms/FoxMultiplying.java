@@ -59,7 +59,6 @@ public class FoxMultiplying {
                 int b_i = row;
                 int a_j = row;
                 while (counter < a.length) {
-
                     for (int i = 0; i < a.length; i++) {
 //                    System.out.println(Thread.currentThread().getName() + " " + a[row][a_j] * b[b_i][i]);
                         res[row][i] += a[row][a_j] * b[b_i][i];
@@ -69,7 +68,6 @@ public class FoxMultiplying {
                     b_i = (b_i + 1) % a.length;
                     a_j = (a_j + 1) % a.length;
                     counter++;
-
                 }
             }
         }

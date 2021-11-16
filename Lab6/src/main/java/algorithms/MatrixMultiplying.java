@@ -2,7 +2,6 @@ package algorithms;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class MatrixMultiplying {
@@ -15,12 +14,12 @@ public class MatrixMultiplying {
         long start;
         long end;
         System.out.println("SIZE\t\tSIMPLE\t\tTAPE(2)\t\tTAPE(4)\t\tFOX(2)\t\tFOX(4)\t\tCANNON(2)\t\tCANNON(4)\n");
-        for(int s = 0; s < 1; s++) {
-            int[][] a = new int[SIZES[s]][SIZES[s]];
-            int[][] b = new int[SIZES[s]][SIZES[s]];
+        for (int size : SIZES) {
+            int[][] a = new int[size][size];
+            int[][] b = new int[size][size];
 
-            for (int i = 0; i < SIZES[s]; i++) {
-                for (int j = 0; j < SIZES[s]; j++) {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
                     a[i][j] = random.nextInt(10);
                     b[i][j] = random.nextInt(10);
                 }
@@ -62,8 +61,8 @@ public class MatrixMultiplying {
                     + " " + Arrays.deepEquals(simple, fox2)
                     + " " + Arrays.deepEquals(simple, cannon2));
 
-            System.out.print(SIZES[s]);
-            for(long r: results){
+            System.out.print(size);
+            for (long r : results) {
                 System.out.print("\t\t" + r + " ms");
             }
             System.out.println();
