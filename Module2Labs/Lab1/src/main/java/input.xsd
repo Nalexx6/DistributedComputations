@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="$LOCAL_SCHEMA$" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Airport" type="loc:AirportType" xmlns:loc="$LOCAL_SCHEMA$"/>
+
+  <xs:complexType name="AirportType">
+    <xs:sequence>
+      <xs:element type="loc:AirCompanyType" name="AirCompany" maxOccurs="unbounded" xmlns:loc="$LOCAL_SCHEMA$"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirCompanyType">
+    <xs:sequence>
+      <xs:element type="loc:FlightType" name="Flight" maxOccurs="unbounded" xmlns:loc="$LOCAL_SCHEMA$"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="required"/>
+    <xs:attribute type="xs:string" name="name" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="FlightType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id" use="required"/>
+        <xs:attribute type="xs:string" name="cityFrom" use="required"/>
+        <xs:attribute type="xs:string" name="cityTo" use="required"/>
+        <xs:attribute type="xs:string" name="companyId" use="required"/>
+        <xs:attribute type="xs:string" name="passengersAmount" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+
+</xs:schema>

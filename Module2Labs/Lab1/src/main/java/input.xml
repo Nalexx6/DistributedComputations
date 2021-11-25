@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Airport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="$LOCAL_SCHEMA$"
+         xsi:noNamespaceSchemaLocation="input.xsd">
+
+    <AirCompany id="1" name="MAU">
+        <Flight id="1" cityFrom="Kyiv" cityTo="Lviv" companyId="1" passengersAmount="70"/>
+        <Flight id="2" cityFrom="Paris" cityTo="Lviv" companyId="1" passengersAmount="100"/>
+        <Flight id="3" cityFrom="Kyiv" cityTo="Paris" companyId="1" passengersAmount="100"/>
+    </AirCompany>
+    <AirCompany id="2" name="Windrose">
+        <Flight id="4" cityFrom="Kyiv" cityTo="Odessa" companyId="2" passengersAmount="80"/>
+        <Flight id="5" cityFrom="Paris" cityTo="Madrid" companyId="2" passengersAmount="120"/>
+    </AirCompany>
+    <AirCompany id="3" name="Emirates">
+        <Flight id="6" cityFrom="Kyiv" cityTo="Dubai" companyId="3" passengersAmount="120"/>
+    </AirCompany>
+</Airport>
