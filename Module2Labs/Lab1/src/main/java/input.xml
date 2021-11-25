@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Airport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="$LOCAL_SCHEMA$"
-         xsi:noNamespaceSchemaLocation="input.xsd">
-
+<Airport>
     <AirCompany id="1" name="MAU">
         <Flight id="1" cityFrom="Kyiv" cityTo="Lviv" companyId="1" passengersAmount="70"/>
         <Flight id="2" cityFrom="Paris" cityTo="Lviv" companyId="1" passengersAmount="100"/>
