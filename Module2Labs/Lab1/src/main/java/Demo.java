@@ -18,15 +18,7 @@ public class Demo {
     public static void main(String[] args){
 
         try {
-            Connection con = DBManager.getInstance().getConnection();
-            //Initialize the script runner
-//            ScriptRunner sr = new ScriptRunner(con);
-//            //Creating a reader object
-//            Reader reader = new StringReader("CREATE TABLE IF NOT EXISTS air_company (\n" +
-//                    "  id int AUTO_INCREMENT PRIMARY KEY,\n" +
-//                    "  name varchar(45) DEFAULT NULL\n);");
-//            //Running the script
-//            sr.runScript(reader);
+            Connection con = DBManager.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("show grants;");
             while (rs.next()){
