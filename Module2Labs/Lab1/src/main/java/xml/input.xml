@@ -11,6 +11,6 @@
         <Flight id="5" cityFrom="Paris" cityTo="Madrid" companyId="2" passengersAmount="120"/>
     </AirCompany>
     <AirCompany id="3" name="Emirates">
-        <Flight id="6" cityFrom="Kyiv" cityTo="Dubai" companyId="3" passengersAmount="120"/>
+        <Flight id="6" cityFrom="Kyiv" cityTo="Dubai" companyId="3" passengersAmount="100"/>
     </AirCompany>
 </Airport>

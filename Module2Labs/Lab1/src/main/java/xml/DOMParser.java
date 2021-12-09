@@ -1,3 +1,5 @@
+package xml;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -45,7 +47,7 @@ public class DOMParser {
     public static Airport parse(String path) throws ParserConfigurationException, SAXException, IOException {
         SchemaFactory sf =
                 SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-        Schema s = sf.newSchema(new File("src/main/java/input.xsd"));
+        Schema s = sf.newSchema(new File("src/main/java/xml/input.xsd"));
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(false);
         factory.setSchema(s);
@@ -115,7 +117,7 @@ public class DOMParser {
     }
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-        Airport airport = parse("src/main/java/input.xml");
-        write(airport,"src/main/java/output.xml");
+        Airport airport = parse("src/main/java/xml/input.xml");
+        write(airport,"src/main/java/xml/output.xml");
     }
 }

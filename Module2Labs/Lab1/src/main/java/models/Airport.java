@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Airport {
-    private List<AirCompany> companies;
+    private final List<AirCompany> companies;
 
     public Airport() {
         this.companies = new ArrayList<>();
