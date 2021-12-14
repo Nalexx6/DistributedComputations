@@ -37,24 +37,6 @@ public class Client {
         return null;
     }
 
-    public Flight flightFindByCityFrom(String cityFrom) {
-        String query = "FlightFindByCityFrom" + separator + cityFrom;
-        out.println(query);
-        String response = "";
-        try {
-            response = in.readLine();
-            String[] fields = response.split(separator);
-            long id = Long.parseLong(fields[0]);
-            String cityTo = fields[3];
-            Integer passengersAmount = Integer.parseInt(fields[4]);
-            long AirCompanyId = Long.parseLong(fields[5]);
-            return new Flight(id,  cityFrom, cityTo, passengersAmount, AirCompanyId);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public AirCompany airCompanyFindByName(String name) {
         String query = "AirCompanyFindByName" + separator + name;
         out.println(query);

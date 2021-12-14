@@ -31,30 +31,6 @@ public class FlightDAO {
         return null;
     }
 
-    public static Flight findByCityFrom(String cityFrom) {
-        try (Connection connection = DBManager.getConnection();) {
-            String sql = "SELECT * FROM flight WHERE city_from = ?";
-            assert connection != null;
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, cityFrom);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            Flight flight = null;
-            if (resultSet.next()) {
-                flight = new Flight();
-                flight.setId(resultSet.getLong(1));
-                flight.setCityFrom(resultSet.getString(2));
-                flight.setCityTo(resultSet.getString(3));
-                flight.setPassengersAmount(resultSet.getInt(4));
-                flight.setCompanyId(resultSet.getLong(5));
-            }
-            preparedStatement.close();
-            return flight;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public static boolean update(Flight flight) {
         try (Connection connection = DBManager.getConnection();) {
             String sql = "UPDATE flight SET city_from = ?, city_to = ?, passengers_amount = ?, company_id = ?, WHERE id = ?";

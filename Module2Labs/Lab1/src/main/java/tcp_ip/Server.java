@@ -62,14 +62,6 @@ public class Server {
                         response = str.toString();
                         out.println(response);
                         break;
-                    case "FlightFindByCityFrom":
-                        String cityFrom = fields[1];
-                        Flight = FlightDAO.findByCityFrom(cityFrom);
-                        assert Flight != null;
-                        response = Flight.getId() + separator + Flight.getCityFrom() + separator + Flight.getCityFrom()
-                                + separator + Flight.getPassengersAmount() + separator + Flight.getCompanyId();
-                        out.println(response);
-                        break;
                     case "AirCompanyFindByName":
                         String name = fields[1];
                         AirCompany = AirCompanyDAO.findByName(name);
@@ -79,7 +71,7 @@ public class Server {
                         break;
                     case "FlightUpdate":
                         id = Long.parseLong(fields[1]);
-                        cityFrom = fields[2];
+                        String cityFrom = fields[2];
                         String cityTo = fields[3];
                         Integer passengersAmount = Integer.parseInt(fields[4]);
                         Long AirCompanyId = Long.parseLong(fields[5]);
