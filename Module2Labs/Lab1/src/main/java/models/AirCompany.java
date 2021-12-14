@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AirCompany {
-    private String id;
+    private long id;
     private String name;
     private List<Flight> flights;
 
@@ -13,16 +13,16 @@ public class AirCompany {
         flights = new ArrayList<>();
     }
     
-    public AirCompany(String id, String name){
+    public AirCompany(long id, String name){
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

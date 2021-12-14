@@ -17,11 +17,11 @@ public class FlightDAO {
             Flight flight = null;
             if (resultSet.next()) {
                 flight = new Flight();
-                flight.setId(Long.toString(resultSet.getLong(1)));
+                flight.setId(resultSet.getLong(1));
                 flight.setCityFrom(resultSet.getString(2));
                 flight.setCityTo(resultSet.getString(3));
                 flight.setPassengersAmount(resultSet.getInt(4));
-                flight.setCompanyId(Long.toString(resultSet.getLong(5)));
+                flight.setCompanyId(resultSet.getLong(5));
             }
             preparedStatement.close();
             return flight;
@@ -41,11 +41,11 @@ public class FlightDAO {
             Flight flight = null;
             if (resultSet.next()) {
                 flight = new Flight();
-                flight.setId(Long.toString(resultSet.getLong(1)));
+                flight.setId(resultSet.getLong(1));
                 flight.setCityFrom(resultSet.getString(2));
                 flight.setCityTo(resultSet.getString(3));
                 flight.setPassengersAmount(resultSet.getInt(4));
-                flight.setCompanyId(Long.toString(resultSet.getLong(5)));
+                flight.setCompanyId(resultSet.getLong(5));
             }
             preparedStatement.close();
             return flight;
@@ -63,8 +63,8 @@ public class FlightDAO {
             preparedStatement.setString(1, flight.getCityFrom());
             preparedStatement.setString(2, flight.getCityTo());
             preparedStatement.setInt(3, flight.getPassengersAmount());
-            preparedStatement.setLong(4, Long.parseLong(flight.getCompanyId()));
-            preparedStatement.setLong(5, Long.parseLong(flight.getId()));
+            preparedStatement.setLong(4, flight.getCompanyId());
+            preparedStatement.setLong(5, flight.getId());
             int result = preparedStatement.executeUpdate();
             preparedStatement.close();
             return result > 0;
@@ -82,11 +82,11 @@ public class FlightDAO {
             preparedStatement.setString(1, flight.getCityFrom());
             preparedStatement.setString(2, flight.getCityTo());
             preparedStatement.setInt(3, flight.getPassengersAmount());
-            preparedStatement.setLong(4, Long.parseLong(flight.getCompanyId()));
+            preparedStatement.setLong(4, flight.getCompanyId());
             if (preparedStatement.executeUpdate() > 0) {
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 if (resultSet.next()) {
-                    flight.setId(Long.toString(resultSet.getLong(1)));
+                    flight.setId(resultSet.getLong(1));
                 } else
                     return false;
                 preparedStatement.close();
@@ -103,7 +103,7 @@ public class FlightDAO {
             String sql = "DELETE FROM flight WHERE id = ?";
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, Long.parseLong(flight.getId()));
+            preparedStatement.setLong(1, flight.getId());
             int result = preparedStatement.executeUpdate();
             preparedStatement.close();
             return result > 0;
@@ -122,11 +122,11 @@ public class FlightDAO {
             List<Flight> list = new ArrayList<>();
             while (resultSet.next()) {
                 Flight flight = new Flight();
-                flight.setId(Long.toString(resultSet.getLong(1)));
+                flight.setId(resultSet.getLong(1));
                 flight.setCityFrom(resultSet.getString(2));
                 flight.setCityTo(resultSet.getString(3));
                 flight.setPassengersAmount(resultSet.getInt(4));
-                flight.setCompanyId(Long.toString(resultSet.getLong(5)));
+                flight.setCompanyId(resultSet.getLong(5));
                 list.add(flight);
             }
             preparedStatement.close();
@@ -137,7 +137,7 @@ public class FlightDAO {
         return null;
     }
 
-    public static List<Flight> findByGenreId(Long id) {
+    public static List<Flight> findByAirCompanyId(Long id) {
         try (Connection connection = DBManager.getConnection();) {
             String sql = "SELECT * FROM flight WHERE company_id = ?";
             assert connection != null;
@@ -147,11 +147,11 @@ public class FlightDAO {
             List<Flight> list = new ArrayList<>();
             while (resultSet.next()) {
                 Flight flight = new Flight();
-                flight.setId(Long.toString(resultSet.getLong(1)));
+                flight.setId(resultSet.getLong(1));
                 flight.setCityFrom(resultSet.getString(2));
                 flight.setCityTo(resultSet.getString(3));
                 flight.setPassengersAmount(resultSet.getInt(4));
-                flight.setCompanyId(Long.toString(resultSet.getLong(5)));
+                flight.setCompanyId(resultSet.getLong(5));
                 list.add(flight);
             }
             preparedStatement.close();

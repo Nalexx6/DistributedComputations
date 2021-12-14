@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirCompanyDao {
+public class AirCompanyDAO {
     public static AirCompany findById(long id) {
         try (Connection connection = DBManager.getConnection()) {
             String sql =
@@ -18,7 +18,7 @@ public class AirCompanyDao {
             AirCompany airCompany = null;
             if (resultSet.next()) {
                 airCompany = new AirCompany();
-                airCompany.setId(Long.toString(resultSet.getLong(1)));
+                airCompany.setId(resultSet.getLong(1));
                 airCompany.setName(resultSet.getString(2));
             }
             preparedStatement.close();
@@ -39,7 +39,7 @@ public class AirCompanyDao {
             AirCompany airCompany = null;
             if (resultSet.next()) {
                 airCompany = new AirCompany();
-                airCompany.setId(Long.toString(resultSet.getLong(1)));
+                airCompany.setId(resultSet.getLong(1));
                 airCompany.setName(resultSet.getString(2));
             }
             preparedStatement.close();
@@ -56,7 +56,7 @@ public class AirCompanyDao {
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, company.getName());
-            preparedStatement.setLong(2, Long.parseLong(company.getId()));
+            preparedStatement.setLong(2, company.getId());
             int result = preparedStatement.executeUpdate();
             preparedStatement.close();
             return result > 0;
@@ -75,7 +75,7 @@ public class AirCompanyDao {
             if(preparedStatement.executeUpdate() > 0) {
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 if (resultSet.next()) {
-                    company.setId(Long.toString(resultSet.getLong(1)));
+                    company.setId(resultSet.getLong(1));
                 } else
                     return false;
                 preparedStatement.close();
@@ -94,7 +94,7 @@ public class AirCompanyDao {
             String sql = "DELETE FROM air_company WHERE id = ?";
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, Long.parseLong(company.getId()));
+            preparedStatement.setLong(1, company.getId());
             int result = preparedStatement.executeUpdate();
             preparedStatement.close();
             return result > 0;
@@ -113,7 +113,7 @@ public class AirCompanyDao {
             List<AirCompany> list = new ArrayList<>();
             while (resultSet.next()) {
                 AirCompany airCompany = new AirCompany();
-                airCompany.setId(Long.toString(resultSet.getLong(1)));
+                airCompany.setId(resultSet.getLong(1));
                 airCompany.setName(resultSet.getString(2));
                 list.add(airCompany);
             }

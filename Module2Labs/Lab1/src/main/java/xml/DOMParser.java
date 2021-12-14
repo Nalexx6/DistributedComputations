@@ -61,7 +61,7 @@ public class DOMParser {
         for(int i = 0; i < nodes.getLength(); ++i) {
             Element n = (Element)nodes.item(i);
             AirCompany company = new AirCompany();
-            company.setId(n.getAttribute("id"));
+            company.setId(Long.parseLong(n.getAttribute("id")));
             company.setName(n.getAttribute("name"));
             airport.addAirCompany(company);
 
@@ -71,8 +71,8 @@ public class DOMParser {
         for(int j =0; j < nodes.getLength(); ++j) {
             Element e = (Element) nodes.item(j);
             Flight flight = new Flight();
-            flight.setId(e.getAttribute("id"));
-            flight.setCompanyId(e.getAttribute("companyId"));
+            flight.setId(Long.parseLong(e.getAttribute("id")));
+            flight.setCompanyId(Long.parseLong(e.getAttribute("companyId")));
             flight.setCityFrom(e.getAttribute("cityFrom"));
             flight.setCityTo(e.getAttribute("cityTo"));
             flight.setPassengersAmount(Integer.parseInt(e.getAttribute("passengersAmount")));
@@ -93,14 +93,14 @@ public class DOMParser {
         List<AirCompany> companies = airport.getCompanies();
         for(AirCompany company :  companies) {
             Element cmp = doc.createElement("AirCompany");
-            cmp.setAttribute("id", company.getId());
+            cmp.setAttribute("id", Long.toString(company.getId()));
             cmp.setAttribute("name", company.getName());
             root.appendChild(cmp);
 
             for(Flight flight: company.getFlights()) {
                 Element f = doc.createElement("Flight");
-                f.setAttribute("id", flight.getId());
-                f.setAttribute("companyId", flight.getCompanyId());
+                f.setAttribute("id", Long.toString(flight.getId()));
+                f.setAttribute("companyId", Long.toString(flight.getCompanyId()));
                 f.setAttribute("cityFrom", flight.getCityFrom());
                 f.setAttribute("cityTo", flight.getCityTo());
                 f.setAttribute("passengersAmount", Integer.toString(flight.getPassengersAmount()));

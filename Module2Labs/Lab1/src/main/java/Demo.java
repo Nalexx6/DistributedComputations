@@ -1,17 +1,12 @@
-import jdbc.AirCompanyDao;
+import jdbc.AirCompanyDAO;
 import jdbc.DBManager;
 import models.AirCompany;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.Reader;
-import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.ibatis.jdbc.*;
 
 public class Demo {
 
@@ -27,7 +22,7 @@ public class Demo {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        System.out.println(AirCompanyDao.insert(new AirCompany("2", "MAU")));
-        System.out.println(AirCompanyDao.findByName("MAU").getName());
+        System.out.println(AirCompanyDAO.insert(new AirCompany(2, "MAU")));
+        System.out.println(AirCompanyDAO.findByName("MAU").getName());
     }
 }

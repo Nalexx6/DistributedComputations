@@ -1,8 +1,8 @@
 package models;
 
 public class Flight {
-    private String id;
-    private String companyId;
+    private long id;
+    private long companyId;
     private String cityFrom;
     private String cityTo;
     private Integer passengersAmount;
@@ -11,26 +11,27 @@ public class Flight {
         
     }
     
-    public Flight(String id, String cityFrom, String cityTo, Integer passengersAmount) {
+    public Flight(long id, String cityFrom, String cityTo, Integer passengersAmount, long companyId) {
         this.id = id;
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
         this.passengersAmount = passengersAmount;
+        this.companyId = companyId;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getCompanyId() {
+    public long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(long companyId) {
         this.companyId = companyId;
     }
 
