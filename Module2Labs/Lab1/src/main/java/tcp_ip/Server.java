@@ -43,14 +43,14 @@ public class Server {
                 return true;
             } else {
                 String action = fields[0];
-                AirCompany AirCompany;
-                Flight Flight;
+                AirCompany airCompany;
+                Flight flight;
 
                 switch (action) {
                     case "AirCompanyFindById":
                         Long id = Long.parseLong(fields[1]);
-                        AirCompany = AirCompanyDAO.findById(id);
-                        response = AirCompany.getName();
+                        airCompany = AirCompanyDAO.findById(id);
+                        response = airCompany.getName();
                         out.println(response);
                         break;
                     case "FlightFindByAirCompanyId":
@@ -64,9 +64,9 @@ public class Server {
                         break;
                     case "AirCompanyFindByName":
                         String name = fields[1];
-                        AirCompany = AirCompanyDAO.findByName(name);
-                        assert AirCompany != null;
-                        response = AirCompany.getId() + "";
+                        airCompany = AirCompanyDAO.findByName(name);
+                        assert airCompany != null;
+                        response = airCompany.getId() + "";
                         out.println(response);
                         break;
                     case "FlightUpdate":
@@ -75,8 +75,8 @@ public class Server {
                         String cityTo = fields[3];
                         Integer passengersAmount = Integer.parseInt(fields[4]);
                         Long AirCompanyId = Long.parseLong(fields[5]);
-                        Flight = new Flight(id, cityFrom, cityTo, passengersAmount, AirCompanyId);
-                        if (FlightDAO.update(Flight))
+                        flight = new Flight(id, cityFrom, cityTo, passengersAmount, AirCompanyId);
+                        if (FlightDAO.update(flight))
                             response = "true";
                         else
                             response = "false";
@@ -86,8 +86,8 @@ public class Server {
                     case "AirCompanyUpdate":
                         id = Long.parseLong(fields[1]);
                         name = fields[2];
-                        AirCompany = new AirCompany(id, name);
-                        if (AirCompanyDAO.update(AirCompany)) {
+                        airCompany = new AirCompany(id, name);
+                        if (AirCompanyDAO.update(airCompany)) {
                             response = "true";
                         } else {
                             response = "false";
@@ -99,8 +99,8 @@ public class Server {
                         cityTo = fields[3];
                         passengersAmount = Integer.parseInt(fields[4]);
                         AirCompanyId = Long.parseLong(fields[5]);
-                        Flight = new Flight(0,  cityFrom, cityTo, passengersAmount, AirCompanyId);
-                        if (FlightDAO.insert(Flight)) {
+                        flight = new Flight(0,  cityFrom, cityTo, passengersAmount, AirCompanyId);
+                        if (FlightDAO.insert(flight)) {
                             response = "true";
                         } else {
                             response = "false";
@@ -109,9 +109,9 @@ public class Server {
                         break;
                     case "AirCompanyInsert":
                         name = fields[1];
-                        AirCompany = new AirCompany();
-                        AirCompany.setName(name);
-                        if (AirCompanyDAO.insert(AirCompany)) {
+                        airCompany = new AirCompany();
+                        airCompany.setName(name);
+                        if (AirCompanyDAO.insert(airCompany)) {
                             response = "true";
                         } else {
                             response = "false";
@@ -120,9 +120,9 @@ public class Server {
                         break;
                     case "FlightDelete":
                         id = Long.parseLong(fields[1]);
-                        Flight = new Flight();
-                        Flight.setId(id);
-                        if (FlightDAO.delete(Flight)) {
+                        flight = new Flight();
+                        flight.setId(id);
+                        if (FlightDAO.delete(flight)) {
                             response = "true";
                         } else {
                             response = "false";
@@ -131,9 +131,9 @@ public class Server {
                         break;
                     case "AirCompanyDelete":
                         id = Long.parseLong(fields[1]);
-                        AirCompany = new AirCompany();
-                        AirCompany.setId(id);
-                        if (AirCompanyDAO.delete(AirCompany)) {
+                        airCompany = new AirCompany();
+                        airCompany.setId(id);
+                        if (AirCompanyDAO.delete(airCompany)) {
                             response = "true";
                         } else {
                             response = "false";
@@ -149,9 +149,9 @@ public class Server {
                         out.println(response);
                         break;
                     case "AirCompanyAll":
-                        List<AirCompany> AirCompanysList = AirCompanyDAO.findAll();
+                        List<AirCompany> airCompaniesList = AirCompanyDAO.findAll();
                         str = new StringBuilder();
-                        for (AirCompany company : AirCompanysList) {
+                        for (AirCompany company : airCompaniesList) {
                             str.append(company.getId());
                             str.append(separator);
                             str.append(company.getName());
